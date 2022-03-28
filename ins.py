@@ -74,8 +74,9 @@ url = 'https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f
 headers={
     'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
 }
-url = 'https://www.instagram.com'
-doc = json.loads(requests.get(url,headers=headers).content)
+docu = requests.get(url,headers=headers).content
+print(docu)
+doc = json.loads(docu)
 data = []
 edge = doc['data']['user']['edge_owner_to_timeline_media']['edges']
 for i in range(len(edge)):
