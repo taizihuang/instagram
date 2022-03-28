@@ -14,4 +14,4 @@ jobs:
                 host: home.ustc.edu.cn
                 username: ${{ secrets.ftp_username }}
                 password: ${{ secrets.ftp_password }}
-                destination: instagram
+                destination: public_html/instagram
