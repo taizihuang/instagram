@@ -70,7 +70,7 @@ def genHTML(data):
     time = datetime.datetime.now().strftime('%m-%d %H:%M')
     with open('index.html','w',encoding='utf8') as html:
         html.write(HTML.render(data=data,time=time))
-url = 'https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables=%7B%22id%22%3A%223127941626%22%2C%22first%22%3A12%7D'
+url = "https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables=%7B%22id%22%3A%223127941626%22%2C%22first%22%3A12%7D"
 headers={
     'Host': 'www.instagram.com',
     'Origin': 'https://www.instagram.com',
