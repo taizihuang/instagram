@@ -18,10 +18,6 @@ def fetchComment(code):
         comment_list.append(edges[i]['node']['text'])
     return comment_list
 def fetchMedia(url,code):
-    headers={
-    'cookie': cookie,
-    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
-}
     if type(url) == str:
         img = requests.get(url,headers=headers).content
         if 'mp4' in url:
