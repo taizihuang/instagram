@@ -13,7 +13,7 @@ jobs:
               server: home.ustc.edu.cn
               username: ${{ secrets.ftp_username }}
               password: ${{ secrets.ftp_password }}
-              local-dir: /home/runner/work/instagram/instagram
+              local-dir: /home/runner/work/instagram/instagram/
               server-dir: ./public_html/instagram/
               exclude: |
                 **/.git*
