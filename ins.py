@@ -3,15 +3,21 @@ from bs4 import BeautifulSoup
 from mako.template import Template
 
 def fetchComment(code):
-    doc = json.loads(requests.get('https://www.instagram.com/p/{}/?__a=1&__d=dis'.format(code)).content)
+    headers={
+    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
+}
+    doc = json.loads(requests.get('https://www.instagram.com/p/{}/?__a=1&__d=dis'.format(code),headers=headers).content)
     edges = doc['graphql']['shortcode_media']['edge_media_to_parent_comment']['edges']
     comment_list = []
     for i in range(len(edges)):
         comment_list.append(edges[i]['node']['text'])
     return comment_list
 def fetchMedia(url,code):
+    headers={
+    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
+}
     if type(url) == str:
-        img = requests.get(url).content
+        img = requests.get(url,headers=headers).content
         if 'mp4' in url:
             url = code+'.mp4'
         else:
@@ -65,7 +71,10 @@ def genHTML(data):
     with open('index.html','w',encoding='utf8') as html:
         html.write(HTML.render(data=data,time=time))
 url = 'https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables=%7B%22id%22%3A%223127941626%22%2C%22first%22%3A12%7D'
-doc = json.loads(requests.get(url).content)
+headers={
+    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
+}
+doc = json.loads(requests.get(url,headers=headers).content)
 data = []
 edge = doc['data']['user']['edge_owner_to_timeline_media']['edges']
 for i in range(len(edge)):
