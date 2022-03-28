@@ -6,6 +6,8 @@ cookie = 'mid=YF4JlwALAAHD4x9uS3EtNR5NBAx4; ig_did=97E920C4-AFDC-4DA4-A334-EE855
 
 def fetchComment(code):
     headers={
+    'Host': 'www.instagram.com',
+    'Origin': 'https://www.instagram.com',
     'cookie': cookie,
     'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
 }
