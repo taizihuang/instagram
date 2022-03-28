@@ -7,11 +7,10 @@ jobs:
     build:
         runs-on: ubuntu-20.04
         steps:
-          - name: Publish
-            uses: socram8888/ftp-hash-sync@master
+          - name: Sync files
+            uses: SamKirkland/FTP-Deploy-Action@4.3.0
             with:
-                protocol: ftp
-                host: home.ustc.edu.cn
-                username: ${{ secrets.ftp_username }}
-                password: ${{ secrets.ftp_password }}
-                destination: public_html/instagram
+              server: home.ustc.edu.cn
+              username: ${{ secrets.ftp_username }}
+              password: ${{ secrets.ftp_password }}
+              server-dir: public_html/instagram
