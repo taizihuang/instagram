@@ -10,7 +10,7 @@ headers={
 }
 
 def fetchComment(code):
-    doc = json.loads(requests.get('https://www.instagram.com/p/{}/?__a=1&__d=dis'.format(code),headers=headers).content)
+    doc = json.loads(requests.get('https://www.instagram.com/p/{}/?__a=1&__d=dis'.format(code)).content)
     print(doc)
     edges = doc['graphql']['shortcode_media']['edge_media_to_parent_comment']['edges']
     comment_list = []
