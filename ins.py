@@ -3,13 +3,12 @@ from bs4 import BeautifulSoup
 from mako.template import Template
 os.environ['https_proxy']='127.0.0.1:7890'
 
-def fetchComment(code):
-    doc = json.loads(requests.get('https://www.instagram.com/p/{}/?__a=1&__d=dis'.format(code)).content)
-    print(doc)
-    edges = doc['graphql']['shortcode_media']['edge_media_to_parent_comment']['edges']
+def fetchComment(id):
+    doc = json.loads(requests.get('https://i.instagram.com/api/v1/media/{}/comments/?can_support_threading=true&permalink_enabled=false'.format(id),headers=headers).content)
+    comments = doc['comments']
     comment_list = []
-    for i in range(len(edges)):
-        comment_list.append(edges[i]['node']['text'])
+    for comment in comments:
+        comment_list.append(comment['text'])
     return comment_list
 def fetchMedia(url,code):
     if type(url) == str:
@@ -70,15 +69,29 @@ def genHTML(data):
 with open('latest.txt','r') as f:
     c = f.read()
 url = "https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables=%7B%22id%22%3A%223127941626%22%2C%22first%22%3A12%7D"
-docu = requests.get(url).content
+headers = {
+    'cookie': 'mid=YF4JlwALAAHD4x9uS3EtNR5NBAx4; ig_did=97E920C4-AFDC-4DA4-A334-EE8552DE27B2; fbm_124024574287414=base_domain=.instagram.com; ig_nrcb=1; csrftoken=FsmuOqR2bm54Ald6RfkEEXaNM6Tyudd7; ds_user_id=52459994591; sessionid=52459994591%3Aopj0twpgSuw2VH%3A14;',
+    'origin': 'https://www.instagram.com',
+    'referer': 'https://www.instagram.com/',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36',
+    'x-asbd-id': '198387',
+    'x-ig-app-id': '936619743392459',
+    'x-ig-www-claim': 'hmac.AR2lgwQ6fzk9KaZ6pqsMi664cQMX8-j7byYt2qklbPTp4WHO'
+}
+docu = requests.get(url,headers=headers).content
 doc = json.loads(docu)
 data = []
 edge = doc['data']['user']['edge_owner_to_timeline_media']['edges']
 for i in range(len(edge)):
     node = edge[i]['node']
     code = node['shortcode']
-    if code == c:
-        quit()
+    id = node['id']
+    if i == 0:
+        if code == c:
+            quit()
+        else:
+            with open('latest.txt','w') as f:
+                f.write(code)
     url = node['display_resources'][-1]['src']
     if 'edge_sidecar_to_children' in node:
         url = [url]
@@ -91,7 +104,8 @@ for i in range(len(edge)):
     if node['edge_media_to_caption']['edges']:
         caption = node['edge_media_to_caption']['edges'][0]['node']['text']
     url = fetchMedia(url,code)
-    comment_list = fetchComment(code)
+
+    comment_list = fetchComment(id)
     comment = '<br>->  '.join(comment_list)
     t = datetime.datetime.fromtimestamp(node['taken_at_timestamp']).strftime('%Y/%m/%d')
     data.append((url,t,caption,comment))
