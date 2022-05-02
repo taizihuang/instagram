@@ -107,7 +107,7 @@ headers = {
     'cookie': 'mid=YF4JlwALAAHD4x9uS3EtNR5NBAx4; ig_did=97E920C4-AFDC-4DA4-A334-EE8552DE27B2; fbm_124024574287414=base_domain=.instagram.com; ig_nrcb=1; csrftoken=FsmuOqR2bm54Ald6RfkEEXaNM6Tyudd7; ds_user_id=52459994591; sessionid=52459994591%3Aopj0twpgSuw2VH%3A14;',
     'x-asbd-id': '198387',
     'x-ig-app-id': '936619743392459',
-    'x-ig-www-claim': 'hmac.AR2lgwQ6fzk9KaZ6pqsMi664cQMX8-j7byYt2qklbPTp4WHO',
+    'x-ig-www-claim': 'hmac.AR2lgwQ6fzk9KaZ6pqsMi664cQMX8-j7byYt2qklbPTp4Yhq',
     'origin': 'https://www.instagram.com',
     'referer': 'https://www.instagram.com/',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36',
